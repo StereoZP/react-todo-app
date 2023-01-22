@@ -1,0 +1,6 @@
+.strikeOn {
+    text-decoration: line-through;
+}
+.strikeOff{
+    text-decoration: none;
+}
