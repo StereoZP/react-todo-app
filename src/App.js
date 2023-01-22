@@ -2,13 +2,14 @@ import React, {useMemo, useState} from "react";
 import './styles/App.css';
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
-import PostFilter from "./components/PostFilter";
-import MyModal from "./components/UI/MyModal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
-import MySearch from "./components/UI/search/MySearch";
-import MyInput from "./components/UI/input/MyInput";
 
-
+function sortArray (array, sort){
+    if (sort) {
+        return [...array].sort((a, b) => a[sort].localeCompare(b[sort]))
+    }
+    return array;
+}
 
 function App() {
     const [posts, setPosts] = useState([
@@ -17,20 +18,19 @@ function App() {
         {id: 3, title: "React-app3", status: false},
     ]);
 
-    const [filter, setFilter] = useState({sort: '', query: ''})
+    const [filter, setFilter] = useState({sort: '', query: '', field:''})
     const [modal, setModal] = useState(false)
-    
 
-    const sortedPosts = useMemo(() => {
-        if (filter.sort) {
-            return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-        }
-        return posts;
-    }, [filter.sort, posts])
+    const sortedPosts = useMemo(() => sortArray(posts, filter.sort), [filter.sort, posts])
 
     const sortedAndSearchedPosts = useMemo(() => {
-        return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
-    }, [filter.query, sortedPosts])
+        if(!filter.field || !sortedPosts.length){
+            return sortedPosts;
+        }
+        return sortedPosts.filter(post => {
+            return String(post[filter.field]).toLowerCase().includes(filter.query.toLowerCase())
+        })
+    }, [filter.query, filter.field, sortedPosts])
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -39,20 +39,29 @@ function App() {
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
     }
+    const changePostStatus = (post) => {
+        post.status = !post.status;
+
+        const newPosts = posts.filter(p => p.id !== post.id);
+        newPosts.push(post);
+        
+        const sorted = sortArray(posts, filter.sort);
+        setPosts([...sorted]);
+    }
 
     return (
         <div className="App">
             <h1>todos</h1>
 
             <PostForm create={createPost}/>
-            <PostList remove={removePost} posts={posts}/>
+            <PostList remove={removePost} changeStatus={changePostStatus} posts={sortedAndSearchedPosts}/>
             <div className="filter-buttons">
                 <div>
                     <span>{posts.length} item left</span>
                 </div>
                 <div>
-                    <button>All</button>
-                    <button>Active</button>
+                    <button onClick={()=>setFilter({sort: filter.sort, query: '', field:''})}>All</button>
+                    <button onClick={()=>setFilter({sort: filter.sort, query: 'false', field:'status'})}>Active</button>
                     <button>Completed</button>
                 </div>
                 <div>
