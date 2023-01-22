@@ -1,35 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import MyButton from "./UI/button/MyButton";
 import classes from "./PostItem.module.css";
-import {useState} from "react";
-
 
 const PostItem = (props) => {
-
-    const [checked, setChecked] = useState(false);
-
-    const setCheck = () => {
-        setChecked(!checked)
-    }
-    
-    let msg;
-    if(checked){
-        msg = <span className={classes.strikeOn}>{props.post.title}</span>
-        console.log(props.status)
-    }else{
-        msg = <span className={classes.strikeOff}>{props.post.title}</span>
-    
-    }
+    const {post:{status}, post, changeStatus} = props
 
     return (
         <div className="post">
             <div>
-                <input type="checkbox" checked={checked} onChange={setCheck}/>
-                {msg}
+                <input type="checkbox" checked={status} onChange={() => changeStatus(post)}/>
+                <span className={status ? classes.strikeOn: classes.strikeOff}>{post.title}</span>     
             </div>
             <div className="post__btns">
                 <MyButton onClick={() => props.remove(props.post)}>
-                    X
+                    Delete
                 </MyButton>
             </div>
         </div>
