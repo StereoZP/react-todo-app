@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root{
+    display: flex;
+    justify-content: center;
+}
+
+.App{
+    width: 800px;
+}
+
+.post{
+    display: flex;
+    padding: 15px;
+    border: 1px solid teal;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter-buttons{
+    width: 100%;
+    padding: 5px 15px;
+    border: 1px solid teal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.strike {
+    text-decoration: line-through;
+}
