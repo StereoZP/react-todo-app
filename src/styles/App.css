@@ -20,14 +20,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.filter-buttons{
-    width: 100%;
-    padding: 5px 15px;
-    border: 1px solid teal;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
 .strike {
     text-decoration: line-through;
 }

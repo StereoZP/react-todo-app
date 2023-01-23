@@ -4,3 +4,32 @@
     width: 100%;
     justify-content: space-between;
 }
+
+.filterButtons{
+    width: 100%;
+    padding: 5px 15px;
+    border: 1px solid teal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myBtnActiv{
+    padding: 5px 15px;
+    color: white;
+    font-size: 14px;
+    border: 1px solid teal;
+    cursor: pointer;
+    width: 120px;
+    background-color: teal;
+}
+
+.myBtnNoActiv{
+    padding: 5px 15px;
+    color: teal;
+    font-size: 14px;
+    background: transparent;
+    border: 1px solid teal;
+    cursor: pointer;
+    width: 120px;
+}

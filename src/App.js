@@ -2,7 +2,8 @@ import React, {useMemo, useState} from "react";
 import './styles/App.css';
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
-import MyButton from "./components/UI/button/MyButton";
+import PostFilter from "./components/PostFilter";
+
 
 function sortArray (array, sort){
     if (sort) {
@@ -19,8 +20,9 @@ function App() {
     ]);
 
     const [filter, setFilter] = useState({sort: '', query: '', field:''})
-    const [modal, setModal] = useState(false)
+    
 
+ 
     const sortedPosts = useMemo(() => sortArray(posts, filter.sort), [filter.sort, posts])
 
     const sortedAndSearchedPosts = useMemo(() => {
@@ -34,7 +36,7 @@ function App() {
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
-        setModal(false)
+    
     }
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
@@ -49,25 +51,31 @@ function App() {
         setPosts([...sorted]);
     }
 
+    const removeCompletedPost = () => {
+        const activePost = posts.filter(e => e.status === false)
+        setPosts([...activePost])
+    }
+
+    const allPostFilter = () =>{
+        setFilter({sort: filter.sort, query: '', field:''})
+    }
+
+    const activePostFilter = () =>{
+        setFilter({sort: filter.sort, query: 'false', field:'status'})
+    }
+
+    const complitedPostFilter = () =>{
+        setFilter({sort: filter.sort, query: 'true', field:'status'})
+    }
+
+
     return (
         <div className="App">
             <h1>todos</h1>
-
             <PostForm create={createPost}/>
             <PostList remove={removePost} changeStatus={changePostStatus} posts={sortedAndSearchedPosts}/>
-            <div className="filter-buttons">
-                <div>
-                    <span>{posts.length} item left</span>
-                </div>
-                <div>
-                    <button onClick={()=>setFilter({sort: filter.sort, query: '', field:''})}>All</button>
-                    <button onClick={()=>setFilter({sort: filter.sort, query: 'false', field:'status'})}>Active</button>
-                    <button>Completed</button>
-                </div>
-                <div>
-                    <MyButton >Clear completed</MyButton>
-                </div>
-            </div>
+            <PostFilter allPostFilter={allPostFilter} activePostFilter={activePostFilter} complitedPostFilter={complitedPostFilter}
+            removeCompletedPost={removeCompletedPost} posts={posts}/>
         </div>
     );
 }
