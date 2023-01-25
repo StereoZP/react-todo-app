@@ -12,8 +12,13 @@
 .App{
     width: 800px;
 }
-
+.headerText{
+    text-align: center;
+    color: teal;
+    font-size:68px;
+}
 .post{
+    margin-top: 10px;
     display: flex;
     padding: 15px;
     border: 1px solid teal;
@@ -23,4 +28,19 @@
 
 .strike {
     text-decoration: line-through;
+}
+
+.post-enter {
+    transform: translateY(-80px);
+}
+.post-enter-active {
+    transform: translateY(0px);
+    transition: all 500ms ease-in;
+}
+.post-exit {
+    opacity: 1;
+}
+.post-exit-active {
+    transform: translateY(-80px);
+    transition: all 500ms ease-in;
 }

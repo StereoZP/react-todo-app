@@ -9,14 +9,14 @@ const PostFilter = (props) => {
     
 
     return (
-        <div className={classes.filterButtons}>
+        <div className={classes.filter}>
                 <div>
                     <span>{posts.length>1 ? `${posts.length} items left` : `${posts.length} item left`}</span>
                 </div>
                 <div>
-                    <MyButton onClick={allPostFilter}>All</MyButton>
-                    <MyButton onClick={activePostFilter}>Active</MyButton>
-                    <MyButton onClick={complitedPostFilter}>Completed</MyButton>
+                    <MyButton className={classes.filterButtons} onClick={allPostFilter}>All</MyButton>
+                    <MyButton className={classes.filterButtons} onClick={activePostFilter}>Active</MyButton>
+                    <MyButton className={classes.filterButtons} onClick={complitedPostFilter}>Completed</MyButton>
                 </div>
                 <div>
                     <MyButton onClick={removeCompletedPost}>Clear completed</MyButton>

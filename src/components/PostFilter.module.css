@@ -1,11 +1,5 @@
 .filter{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.filterButtons{
+    margin-top: 10px;
     width: 100%;
     padding: 5px 15px;
     border: 1px solid teal;
@@ -14,22 +8,17 @@
     align-items: center;
 }
 
-.myBtnActiv{
-    padding: 5px 15px;
-    color: white;
-    font-size: 14px;
-    border: 1px solid teal;
-    cursor: pointer;
-    width: 120px;
-    background-color: teal;
-}
-
-.myBtnNoActiv{
+.filterButtons{
     padding: 5px 15px;
     color: teal;
     font-size: 14px;
     background: transparent;
-    border: 1px solid teal;
+    border: none;
     cursor: pointer;
     width: 120px;
+}
+
+.filterButtons:focus {
+    color: white;
+    background-color: teal;
 }

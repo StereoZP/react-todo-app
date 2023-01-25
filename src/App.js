@@ -2,7 +2,7 @@ import React, {useMemo, useState} from "react";
 import './styles/App.css';
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
-import PostFilter from "./components/PostFilter";
+
 
 
 function sortArray (array, sort){
@@ -14,9 +14,7 @@ function sortArray (array, sort){
 
 function App() {
     const [posts, setPosts] = useState([
-        {id: 1, title: "React-app1", status: false},
-        {id: 2, title: "React-app2", status: false},
-        {id: 3, title: "React-app3", status: false},
+
     ]);
 
     const [filter, setFilter] = useState({sort: '', query: '', field:''})
@@ -71,11 +69,15 @@ function App() {
 
     return (
         <div className="App">
-            <h1>todos</h1>
+            <h1 className="headerText">todos</h1>
             <PostForm create={createPost}/>
-            <PostList remove={removePost} changeStatus={changePostStatus} posts={sortedAndSearchedPosts}/>
-            <PostFilter allPostFilter={allPostFilter} activePostFilter={activePostFilter} complitedPostFilter={complitedPostFilter}
-            removeCompletedPost={removeCompletedPost} posts={posts}/>
+            <PostList remove={removePost}
+                      changeStatus={changePostStatus}
+                      posts={sortedAndSearchedPosts}
+                      allPostFilter={allPostFilter}
+                      activePostFilter={activePostFilter}
+                      complitedPostFilter={complitedPostFilter}
+                      removeCompletedPost={removeCompletedPost}/>
         </div>
     );
 }
