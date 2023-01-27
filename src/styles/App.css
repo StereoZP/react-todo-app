@@ -17,30 +17,22 @@
     color: teal;
     font-size:68px;
 }
-.post{
-    margin-top: 10px;
-    display: flex;
-    padding: 15px;
-    border: 1px solid teal;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .strike {
     text-decoration: line-through;
 }
 
 .post-enter {
-    transform: translateY(-80px);
+    transform: translateX(-350px);
 }
 .post-enter-active {
-    transform: translateY(0px);
+    transform: translateX(0px);
     transition: all 500ms ease-in;
 }
 .post-exit {
     opacity: 1;
 }
 .post-exit-active {
-    transform: translateY(-80px);
+    transform: translateX(-350px);
     transition: all 500ms ease-in;
 }

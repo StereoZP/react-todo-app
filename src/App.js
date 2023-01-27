@@ -14,13 +14,20 @@ function sortArray (array, sort){
 
 function App() {
     const [posts, setPosts] = useState([
-
+        {id: 1, title: "React-app1", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 2, title: "React-app2", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 3, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 4, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 5, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 6, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 7, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 8, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 9, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 10, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
     ]);
 
     const [filter, setFilter] = useState({sort: '', query: '', field:''})
-    
 
- 
     const sortedPosts = useMemo(() => sortArray(posts, filter.sort), [filter.sort, posts])
 
     const sortedAndSearchedPosts = useMemo(() => {
@@ -34,11 +41,12 @@ function App() {
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
-    
     }
+
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
     }
+
     const changePostStatus = (post) => {
         post.status = !post.status;
 
@@ -69,7 +77,8 @@ function App() {
 
     return (
         <div className="App">
-            <h1 className="headerText">todos</h1>
+            <div>
+                <h1 className="headerText">todos</h1>
             <PostForm create={createPost}/>
             <PostList remove={removePost}
                       changeStatus={changePostStatus}
@@ -78,6 +87,7 @@ function App() {
                       activePostFilter={activePostFilter}
                       complitedPostFilter={complitedPostFilter}
                       removeCompletedPost={removeCompletedPost}/>
+            </div>
         </div>
     );
 }

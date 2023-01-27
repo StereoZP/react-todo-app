@@ -12,7 +12,7 @@ const PostForm = ({create}) => {
         e.preventDefault()
 
         const newPost = {
-            ...post, id: Date.now(), status: false
+            ...post, id: Date.now(), date:new Date().toLocaleString("en-US"), status: false
         }
         create(newPost);
         setPost({title:''});
@@ -26,7 +26,7 @@ const PostForm = ({create}) => {
                 onChange={e => setPost({...post, title: e.target.value})}
                 type="text"
                 placeholder="What needs to be done?"/>
-            <MyButton onClick={addNewPost}>Add todo</MyButton>
+            <MyButton className={classes.addButton} onClick={addNewPost}>Add todo</MyButton>
             </div>
         </form>
     );

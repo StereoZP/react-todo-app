@@ -24,7 +24,7 @@ const PostList = ({posts, title, remove, changeStatus, allPostFilter, activePost
                         timeout={500}
                         classNames="post"
                     >
-                    <PostItem changeStatus={changeStatus} remove={remove} post={post} />
+                    <PostItem changeStatus={changeStatus} remove={remove} post={post}/>
                     </CSSTransition>
                 )}
                 <PostFilter allPostFilter={allPostFilter} activePostFilter={activePostFilter} complitedPostFilter={complitedPostFilter}
