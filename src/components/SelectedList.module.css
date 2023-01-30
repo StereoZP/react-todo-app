@@ -1,0 +1,19 @@
+.selectedPost{
+    width: 400px;
+    margin: 0;
+}
+.selectedList{
+    width: 400px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 10px;
+    left: 1500px;
+}
+
+.selectedItem{
+    background-color: white;
+    color: black;
+    border: 1px solid teal;
+    padding: 10px;
+}

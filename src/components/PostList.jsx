@@ -4,13 +4,6 @@ import {TransitionGroup,CSSTransition} from "react-transition-group";
 import PostFilter from "./PostFilter";
 
 const PostList = ({posts, title, remove, changeStatus, allPostFilter, activePostFilter, complitedPostFilter, removeCompletedPost}) => {
-    if(!posts.length){
-        return (
-            <h1 style={{textAlign: 'center'}}>
-                {/*todos not found*/}
-            </h1>
-        )
-    }
 
     return (
         <div>
@@ -18,7 +11,7 @@ const PostList = ({posts, title, remove, changeStatus, allPostFilter, activePost
                 {title}
             </h1>
             <TransitionGroup>
-                {posts.map((post, index)=>
+                {posts.map((post)=>
                     <CSSTransition
                         key={post.id}
                         timeout={500}

@@ -21,15 +21,13 @@
     padding-right: 15px;
     border: 1px solid teal;
 }
-.postContainer{
-
-}
 .postItem{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .postDate{
+    padding-top: 10px ;
     display: flex;
     justify-content: center;
     align-items: center;

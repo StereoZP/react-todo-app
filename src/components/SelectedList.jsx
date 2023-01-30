@@ -1,11 +1,14 @@
 import React from 'react';
+import PostItem from "./PostItem";
+import classes from "./SelectedList.module.css"
 
-const SelectedList = () => {
-
+const SelectedList = ({removeSelectedPost, selected}) => {
 
     return (
-        <div>
-            test
+        <div className={classes.selectedPost}>
+            {selected.map((post)=>
+                    <PostItem className={classes.selectedItem} remove={removeSelectedPost} post={post} key={post.id}/>
+            )}
         </div>
     );
 };

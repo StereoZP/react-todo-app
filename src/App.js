@@ -2,6 +2,8 @@ import React, {useMemo, useState} from "react";
 import './styles/App.css';
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
+import SelectedList from "./components/SelectedList";
+import cl from "./components/SelectedList.module.css"
 
 
 
@@ -17,16 +19,16 @@ function App() {
         {id: 1, title: "React-app1", date:new Date().toLocaleString("en-US"), status: false},
         {id: 2, title: "React-app2", date:new Date().toLocaleString("en-US"), status: false},
         {id: 3, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
-        {id: 4, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
-        {id: 5, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
-        {id: 6, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
-        {id: 7, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
-        {id: 8, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
-        {id: 9, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
-        {id: 10, title: "React-app3", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 4, title: "React-app4", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 5, title: "React-app5", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 6, title: "React-app4", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 7, title: "React-app5", date:new Date().toLocaleString("en-US"), status: false},
+        {id: 8, title: "React-app4", date:new Date().toLocaleString("en-US"), status: false},
     ]);
 
     const [filter, setFilter] = useState({sort: '', query: '', field:''})
+
+    const [selected, setSelected] = useState([])
 
     const sortedPosts = useMemo(() => sortArray(posts, filter.sort), [filter.sort, posts])
 
@@ -45,6 +47,10 @@ function App() {
 
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
+        setSelected(selected.filter(p => p.id !== post.id))
+    }
+    const removeSelectedPost = (post) => {
+        setSelected(selected.filter(p => p.id !== post.id))
     }
 
     const changePostStatus = (post) => {
@@ -55,11 +61,15 @@ function App() {
         
         const sorted = sortArray(posts, filter.sort);
         setPosts([...sorted]);
+
+        const selectedPost = posts.filter(e => e.status === true)
+        setSelected([...selectedPost])
     }
 
     const removeCompletedPost = () => {
         const activePost = posts.filter(e => e.status === false)
         setPosts([...activePost])
+        setSelected(selected.filter(e => e.status === false))
     }
 
     const allPostFilter = () =>{
@@ -74,10 +84,9 @@ function App() {
         setFilter({sort: filter.sort, query: 'true', field:'status'})
     }
 
-
     return (
-        <div className="App">
-            <div>
+        <div>
+            <div className="App">
                 <h1 className="headerText">todos</h1>
             <PostForm create={createPost}/>
             <PostList remove={removePost}
@@ -87,6 +96,9 @@ function App() {
                       activePostFilter={activePostFilter}
                       complitedPostFilter={complitedPostFilter}
                       removeCompletedPost={removeCompletedPost}/>
+            </div>
+            <div className={cl.selectedList}>
+            <SelectedList posts={posts} selected={selected} removeSelectedPost={removeSelectedPost}/>
             </div>
         </div>
     );
