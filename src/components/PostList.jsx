@@ -3,7 +3,7 @@ import PostItem from "./PostItem";
 import {TransitionGroup,CSSTransition} from "react-transition-group";
 import PostFilter from "./PostFilter";
 
-const PostList = ({posts, title, remove, changeStatus, allPostFilter, activePostFilter, complitedPostFilter, removeCompletedPost}) => {
+const PostList = ({posts, title, remove, changeSelected, allPostFilter, activePostFilter, complitedPostFilter, removeCompletedPost}) => {
 
     return (
         <div>
@@ -17,7 +17,7 @@ const PostList = ({posts, title, remove, changeStatus, allPostFilter, activePost
                         timeout={500}
                         classNames="post"
                     >
-                    <PostItem changeStatus={changeStatus} remove={remove} post={post}/>
+                    <PostItem changeSelected={changeSelected} remove={remove} post={post}/>
                     </CSSTransition>
                 )}
                 <PostFilter allPostFilter={allPostFilter} activePostFilter={activePostFilter} complitedPostFilter={complitedPostFilter}

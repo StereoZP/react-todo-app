@@ -5,14 +5,14 @@ import {useState} from "react";
 import classes from "./PostForm.module.css"
 
 
-const PostForm = ({create}) => {
+const PostForm = ({create, STATUS}) => {
     const [post, setPost] = useState({title:''})
 
     const addNewPost = (e)=>{
         e.preventDefault()
 
         const newPost = {
-            ...post, id: Date.now(), date:new Date().toLocaleString("en-US"), status: false
+            ...post, id: Date.now(), date:new Date().toLocaleString("en-US"), status: STATUS.TODO, selected: false,
         }
         create(newPost);
         setPost({title:''});

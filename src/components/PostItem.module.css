@@ -12,6 +12,20 @@
     padding-right: 15px;
     border: 1px solid teal;
 }
+
+.postActive{
+    text-decoration: none;
+}
+
+.postDone{
+    text-decoration: line-through;
+}
+
+.postItemDone{
+    background-color: darkgreen;
+    color: white;
+}
+
 .postChecked {
     background-color:rgba(143, 255, 219, 0.48);
     color: teal;
