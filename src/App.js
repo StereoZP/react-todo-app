@@ -32,9 +32,6 @@ function App() {
         {id: 8, title: "React-app8", date:new Date().toLocaleString("en-US"), status: STATUS.TODO, selected: false},
     ]);
 
-    console.log(posts)
-
-
     const [filter, setFilter] = useState({sort: '', query: '', field:''})
 
     const sortedPosts = useMemo(() => sortArray(posts, filter.sort), [filter.sort, posts])
@@ -57,9 +54,8 @@ function App() {
     }
 
     const changePostSelected = (post) => {
-        post.selected = !post.selected
-        post.status = STATUS.ACTIVE
 
+        post.selected = !post.selected
             const newPosts = posts.filter(p => p.id !== post.id);
             newPosts.push(post);
 
@@ -68,32 +64,47 @@ function App() {
 
     }
 
-    const changePostStatus = (post) => {
-
-        if (post.status === STATUS.TODO || post.status === STATUS.ACTIVE){
-            post.selected = !post.selected
-            post.status = STATUS.DONE;
-
+    const changePostStatusActive = (posts) => {
+        posts.forEach((post)=> {
+            if(post.selected){
+                post.status = STATUS.ACTIVE
+            }
             const newPosts = posts.filter(p => p.id !== post.id);
             newPosts.push(post);
 
             const sorted = sortArray(posts, filter.sort);
             setPosts([...sorted]);
-        }
-        else {
-            post.status = STATUS.TODO;
+        });
+    }
 
+    const changePostStatusTodo = (posts) => {
+        posts.forEach((post)=> {
+            if(post.selected){
+                post.status = STATUS.TODO
+            }
             const newPosts = posts.filter(p => p.id !== post.id);
             newPosts.push(post);
 
             const sorted = sortArray(posts, filter.sort);
             setPosts([...sorted]);
-        }
+        });
+    }
 
+    const changePostStatusDone = (posts) => {
+        posts.forEach((post)=> {
+            if(post.selected){
+                post.status = STATUS.DONE
+            }
+            const newPosts = posts.filter(p => p.id !== post.id);
+            newPosts.push(post);
+
+            const sorted = sortArray(posts, filter.sort);
+            setPosts([...sorted]);
+        });
     }
 
     const removeCompletedPost = () => {
-        const activePost = posts.filter(e => e.status === STATUS.TODO)
+        const activePost = posts.filter(e => e.status === STATUS.TODO || e.status === STATUS.ACTIVE)
         setPosts([...activePost])
     }
 
@@ -124,7 +135,12 @@ function App() {
                       removeCompletedPost={removeCompletedPost}/>
             </div>
             <div className={cl.selectedList}>
-            <SelectedList posts={posts} selected={posts.selected} remove={removePost} changeStatus={changePostStatus}/>
+            <SelectedList posts={posts}
+                          statusActive={changePostStatusActive}
+                          statusTodo={changePostStatusTodo}
+                          statusDone={changePostStatusDone}
+                          remove={removePost}
+                          changeSelected={changePostSelected}/>
             </div>
         </div>
     );

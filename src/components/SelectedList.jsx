@@ -1,14 +1,17 @@
 import React from 'react';
 import classes from "./SelectedList.module.css"
-import SelectedPostItem from "./SelectedPostItem";
+import PostItem from "./PostItem";
+import SelectedPostStatus from "./SelectedPostStatus";
 
-const SelectedList = ({remove, posts, changeStatus, changeSelected}) => {
+const SelectedList = ({remove, posts, changeSelected, statusActive, statusTodo, statusDone}) => {
 
     return (
         <div className={classes.selectedPost}>
             {posts.filter(e => e.selected === true).map((post)=>
-                    <SelectedPostItem className={classes.selectedItem} changeStatus={changeStatus} changeSelected={changeSelected} remove={remove} post={post} key={post.id}/>
+                    <PostItem changeSelected={changeSelected} remove={remove} post={post} key={post.id}/>
             )}
+            <SelectedPostStatus posts={posts} statusActive={statusActive} statusTodo={statusTodo} statusDone={statusDone} />
+
         </div>
     );
 };

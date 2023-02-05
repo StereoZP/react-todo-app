@@ -10,6 +10,7 @@ const PostItem = (props) => {
         changeSelected(post)
     }
 
+
     const selectedChecked = [selected ? classes.postChecked : classes.post, props.className].join(' ')
     const statusChecked = [(post.status === 'Done') ? classes.postDone : classes.postActive, classes.postTitle].join(' ')
 
@@ -29,6 +30,7 @@ const PostItem = (props) => {
             </div>
             </div>
             <div className={classes.postDate}>{post.date}</div>
+            <div>{post.status}</div>
         </div>
     );
 };
