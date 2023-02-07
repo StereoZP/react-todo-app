@@ -5,7 +5,7 @@ import PostFilter from "./PostFilter";
 
 const PostList = (props) => {
 
-    const {posts, title, remove, changeSelected, allPostFilter, activePostFilter, complitedPostFilter, removeCompletedPost} = props
+    const {tasks, title, remove, changeSelected, allPostFilter, activePostFilter, completedPostFilter, removeCompletedPost} = props
 
     return (
         <div>
@@ -13,7 +13,7 @@ const PostList = (props) => {
                 {title}
             </h1>
             <TransitionGroup>
-                {posts.map((post)=>
+                {tasks.map((post)=>
                     <CSSTransition
                         key={post.id}
                         timeout={500}
@@ -22,8 +22,8 @@ const PostList = (props) => {
                     <PostItem changeSelected={changeSelected} remove={remove} post={post}/>
                     </CSSTransition>
                 )}
-                <PostFilter allPostFilter={allPostFilter} activePostFilter={activePostFilter} complitedPostFilter={complitedPostFilter}
-                            removeCompletedPost={removeCompletedPost} posts={posts}/>
+                <PostFilter allPostFilter={allPostFilter} activePostFilter={activePostFilter} complitedPostFilter={completedPostFilter}
+                            removeCompletedPost={removeCompletedPost} posts={tasks}/>
             </TransitionGroup>
         </div>
     );

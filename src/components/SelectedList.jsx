@@ -1,17 +1,21 @@
 import React from 'react';
 import classes from "./SelectedList.module.css"
 import PostItem from "./PostItem";
-import SelectedPostStatus from "./SelectedPostStatus";
+import MyButton from "./UI/button/MyButton";
 
-const SelectedList = ({remove, posts, changeSelected, statusActive, statusTodo, statusDone}) => {
-
+const SelectedList = ({remove, selectedTasks, tasks, changeSelected, statusActive, statusTodo, statusDone}) => {
     return (
         <div className={classes.selectedPost}>
-            {posts.filter(e => e.selected === true).map((post)=>
+            <div>
+                {selectedTasks.map((post) =>
                     <PostItem changeSelected={changeSelected} remove={remove} post={post} key={post.id}/>
-            )}
-            <SelectedPostStatus posts={posts} statusActive={statusActive} statusTodo={statusTodo} statusDone={statusDone} />
-
+                )}
+            </div>
+            <div className={classes.btn}>
+                <MyButton onClick={() => statusActive(tasks)}>Active</MyButton>
+                <MyButton onClick={() => statusTodo(tasks)}>Todo</MyButton>
+                <MyButton onClick={() => statusDone(tasks)}>Done</MyButton>
+            </div>
         </div>
     );
 };

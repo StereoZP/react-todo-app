@@ -3,30 +3,35 @@ import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
 import {useState} from "react";
 import classes from "./PostForm.module.css"
+import {STATUS} from "../App";
 
 
-const PostForm = ({create, STATUS}) => {
-    const [post, setPost] = useState({title:''})
+const PostForm = ({create}) => {
+    const [post, setPost] = useState({title: ''})
 
-    const addNewPost = (e)=>{
+    const addNewPost = (e) => {
         e.preventDefault()
 
         const newPost = {
-            ...post, id: Date.now(), date:new Date().toLocaleString("en-US"), status: STATUS.TODO, selected: false,
+            ...post,
+            id: Date.now(),
+            date: new Date().toLocaleString("en-US"),
+            status: STATUS.TODO,
+            selected: false,
         }
         create(newPost);
-        setPost({title:''});
+        setPost({title: ''});
     }
 
     return (
         <form>
             <div className={classes.postForm}>
-            <MyInput
-                value={post.title}
-                onChange={e => setPost({...post, title: e.target.value})}
-                type="text"
-                placeholder="What needs to be done?"/>
-            <MyButton className={classes.addButton} onClick={addNewPost}>Add todo</MyButton>
+                <MyInput
+                    value={post.title}
+                    onChange={e => setPost({...post, title: e.target.value})}
+                    type="text"
+                    placeholder="What needs to be done?"/>
+                <MyButton className={classes.addButton} onClick={addNewPost}>Add todo</MyButton>
             </div>
         </form>
     );
